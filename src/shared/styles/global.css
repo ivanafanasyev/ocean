@@ -1,0 +1,92 @@
+:root {
+	/* colors */
+	--text: #0e2f60;
+	--white: #ffffff;
+	--grey-text: #b3bbc4;
+	--green: #5ab975;
+	--light-grey: #eef1f5;
+	--red: #df4c4c;
+	--light-blue: #f5f7fa;
+	--active-blue: #6696ff;
+	--active-blue-half: #6696ff7e;
+	--link-background: rgba(89, 134, 247, 0.1);
+
+	/* shadows */
+	--default-shadow: 0px 2px 4px rgba(0, 27, 59, 0.1);
+	--bottom-shadow: 0px 2px 6px rgba(0, 27, 59, 0.1);
+
+	/* sizes */
+	--header-height: 72px;
+	--content-max-width: 1920px;
+	--content-padding: 32px;
+	--content-gaps: 24px;
+	--content-text-gaps: 8px;
+
+	/* custom */
+	--content-border-radius: 8px;
+}
+
+@font-face {
+	font-family: "Montserrat";
+	src: url("/fonts/Montserrat/woff/Montserrat-Medium.woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+	font-family: "Montserrat";
+	src: url("/fonts/Montserrat/woff/Montserrat-Regular.woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: fallback;
+}
+
+html,
+body {
+	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+		Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 19px;
+	background-color: var(--light-blue);
+	color: var(--text);
+	min-height: 100vh;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+h2 {
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 32px;
+	letter-spacing: 0em;
+}
+
+h3 {
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 24px;
+	letter-spacing: 0em;
+}
+
+.sm-title {
+	font-style: normal;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 17px;
+	color: var(--grey-text);
+}

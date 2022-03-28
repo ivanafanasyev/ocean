@@ -1,0 +1,63 @@
+.wrap {
+	--invactive-color: #eaeaea;
+	--active-color: #6696ff;
+	--toggler-width: 42px;
+	--toggler-height: 24px;
+}
+.labeltext[data-hiddenlabel="true"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+.togglerblock {
+	display: flex;
+	flex-flow: row nowrap;
+}
+.switch {
+	display: inline-block;
+	position: relative;
+	height: 24px;
+	width: 42px;
+}
+.switch input {
+	display: none;
+}
+.slider {
+	background-color: var(--invactive-color);
+	bottom: 0;
+	cursor: pointer;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: 0.4s;
+	border-radius: var(--toggler-height);
+}
+.slider:before {
+	position: absolute;
+	content: "";
+	height: calc(var(--toggler-height) - 4px);
+	width: calc(var(--toggler-height) - 4px);
+	left: 2px;
+	bottom: 2px;
+	background-color: white;
+	transition: 0.4s;
+	border-radius: 50%;
+}
+input:checked + .slider {
+	background-color: var(--active-color);
+}
+input:checked + .slider:before {
+	transform: translateX(calc(var(--toggler-width) - var(--toggler-height)));
+}
+.statustext {
+	display: flex;
+	align-items: center;
+	margin-left: 0.5em;
+	width: 60px;
+}

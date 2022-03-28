@@ -13,12 +13,11 @@ export type TextInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "name"
 	error?: string | null;
 	icon?: JSX.Element | React.ReactNode;
 	iconWrapClassName?: string;
-	ref?: ForwardedRef<HTMLInputElement> | React.LegacyRef<HTMLInputElement> | undefined;
+	reassignedRef?: ForwardedRef<HTMLInputElement> | React.LegacyRef<HTMLInputElement> | undefined;
 };
 
 export const TextInput: FC<TextInputProps> = ({
 	id,
-	name,
 	type = "text",
 	className,
 	label,
@@ -28,27 +27,29 @@ export const TextInput: FC<TextInputProps> = ({
 	errorClassName,
 	error,
 	icon,
+	required,
 	iconWrapClassName,
-	ref,
+	reassignedRef,
 	...props
-}: TextInputProps) => {
-	return (
-		<div className={`${css.inputbox} ${wrapperClassName}`}>
-			<label className={`${css.label} ${labelClassName}`} data-hiddenlabel={hideLabel} htmlFor={id}>
-				{label}
-			</label>
-			<input
-				aria-invalid={error ? "true" : "false"}
-				aria-required={props.required ? "true" : "false"}
-				className={`${css.input} ${className}`}
-				type={type}
-				id={id}
-				name={name}
-				ref={ref}
-				{...props}
-			/>
-			{icon}
-			<p className={css.error}>{error}</p>
-		</div>
-	);
-};
+}: TextInputProps) => (
+	<div className={wrapperClassName ? `${css.inputbox} ${wrapperClassName}` : css.inputbox}>
+		<label
+			className={labelClassName ? `${css.label} ${labelClassName}` : css.label}
+			data-hiddenlabel={hideLabel}
+			htmlFor={id}
+		>
+			{label}
+		</label>
+		<input
+			aria-invalid={error ? "true" : "false"}
+			aria-required={required ? "true" : "false"}
+			className={className ? `${css.input} ${className}` : css.input}
+			type={type}
+			ref={reassignedRef}
+			id={id}
+			{...props}
+		/>
+		{icon}
+		<p className={errorClassName ? `${css.error} ${errorClassName}` : css.error}>{error}</p>
+	</div>
+);

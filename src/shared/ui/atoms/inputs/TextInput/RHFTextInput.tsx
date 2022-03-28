@@ -1,9 +1,9 @@
-import { forwardRef, ForwardRefExoticComponent, RefAttributes } from 'react';
-import { TextInput, TextInputProps } from './index';
+import { forwardRef, ForwardRefExoticComponent, RefAttributes } from "react";
+import { TextInput, TextInputProps } from "./index";
 
 export const RHFTextInput: ForwardRefExoticComponent<
-  TextInputProps & RefAttributes<HTMLInputElement>
+	TextInputProps & RefAttributes<HTMLInputElement>
 > = forwardRef<HTMLInputElement, TextInputProps>(({ ...props }, ref) => {
-  return <TextInput ref={ref} {...props} />;
+	return <TextInput reassignedRef={ref} {...props} />;
 });
-RHFTextInput.displayName = 'TextInput';
+RHFTextInput.displayName = "TextInput";
