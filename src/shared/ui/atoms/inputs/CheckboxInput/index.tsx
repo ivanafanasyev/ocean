@@ -1,8 +1,7 @@
 import { ComponentProps, FC, ForwardedRef } from "react";
-
 import css from "./index.module.css";
 
-export type ToggleInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "name"> & {
+export type CheckboxInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "name"> & {
 	id: string;
 	name: string;
 	label: string;
@@ -11,39 +10,32 @@ export type ToggleInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "nam
 	wrapClassName?: string;
 	labelClassName?: string;
 	blockClassName?: string;
-	statusClassName?: string;
-	statusText?: string;
 };
 
-export const ToggleInput: FC<ToggleInputProps> = ({
+export const CheckboxInput: FC<CheckboxInputProps> = ({
+	onChange,
 	id,
+	reassignedRef,
 	label,
 	hideLabel = false,
-	reassignedRef,
-	onChange,
 	wrapClassName,
 	labelClassName,
 	blockClassName,
-	statusClassName,
-	statusText,
 	...props
-}: ToggleInputProps) => {
+}: CheckboxInputProps) => {
 	return (
 		<div className={wrapClassName ? `${css.wrap} ${wrapClassName}` : css.wrap}>
-			<span
+			<p
 				data-hiddenlabel={hideLabel}
 				className={labelClassName ? `${css.label} ${labelClassName}` : css.label}
 			>
 				{label}
-			</span>
+			</p>
 			<div className={blockClassName ? `${css.block} ${blockClassName}` : css.block}>
-				<label className={css.switch} htmlFor={id}>
-					<input type='checkbox' id={id} ref={reassignedRef} onChange={onChange} {...props} />
-					<div className={css.slider}></div>
+				<label htmlFor={id} className={css.checkbox}>
+					<input type='checkbox' ref={reassignedRef} id={id} onChange={onChange} {...props} />
+					<div className={css.checkmark}></div>
 				</label>
-				<span className={statusClassName ? `${css.status} ${statusClassName}` : css.status}>
-					{statusText}
-				</span>
 			</div>
 		</div>
 	);

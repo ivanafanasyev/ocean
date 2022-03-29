@@ -1,7 +1,7 @@
 {
 	"name": "ocean",
 	"version": "0.1.0",
-	"private": true,
+	"private": false,
 	"scripts": {
 		"dev": "tcm src --watch & next dev",
 		"build": "next build",

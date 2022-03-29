@@ -4,7 +4,7 @@
 	--toggler-width: 42px;
 	--toggler-height: 24px;
 }
-.labeltext[data-hiddenlabel="true"] {
+.label[data-hiddenlabel="true"] {
 	position: absolute;
 	width: 1px;
 	height: 1px;
@@ -14,7 +14,7 @@
 	clip: rect(0 0 0 0);
 	overflow: hidden;
 }
-.togglerblock {
+.block {
 	display: flex;
 	flex-flow: row nowrap;
 }
@@ -55,7 +55,7 @@ input:checked + .slider {
 input:checked + .slider:before {
 	transform: translateX(calc(var(--toggler-width) - var(--toggler-height)));
 }
-.statustext {
+.status {
 	display: flex;
 	align-items: center;
 	margin-left: 0.5em;

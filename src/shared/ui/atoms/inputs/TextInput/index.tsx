@@ -7,7 +7,7 @@ export type TextInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "name"
 	name: string;
 	label: string;
 	hideLabel?: boolean;
-	wrapperClassName?: string;
+	wrapClassName?: string;
 	labelClassName?: string;
 	errorClassName?: string;
 	error?: string | null;
@@ -22,7 +22,7 @@ export const TextInput: FC<TextInputProps> = ({
 	className,
 	label,
 	hideLabel = false,
-	wrapperClassName,
+	wrapClassName,
 	labelClassName,
 	errorClassName,
 	error,
@@ -32,7 +32,7 @@ export const TextInput: FC<TextInputProps> = ({
 	reassignedRef,
 	...props
 }: TextInputProps) => (
-	<div className={wrapperClassName ? `${css.inputbox} ${wrapperClassName}` : css.inputbox}>
+	<div className={wrapClassName ? `${css.inputbox} ${wrapClassName}` : css.inputbox}>
 		<label
 			className={labelClassName ? `${css.label} ${labelClassName}` : css.label}
 			data-hiddenlabel={hideLabel}

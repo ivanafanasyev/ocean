@@ -1,12 +1,17 @@
 import { useForm } from "react-hook-form";
+import { CheckboxInput } from "../../shared/ui/atoms/inputs/CheckboxInput";
 
+import { RHFControllerTextInput } from "../../shared/ui/atoms/inputs/TextInput/RHFControllerTextInput";
 import { RHFTextInput } from "../../shared/ui/atoms/inputs/TextInput/RHFTextInput";
+import { RHFControllerToggleInput } from "../../shared/ui/atoms/inputs/ToggleInput/RHFControllerToggleInput";
 import { RHFToggleInput } from "../../shared/ui/atoms/inputs/ToggleInput/RHFToggleInput";
 
 import css from "./index.module.css";
 
+// TO-DO: validation and types
+
 export const GreatSampleForm = () => {
-	const { register, watch, handleSubmit } = useForm();
+	const { register, watch, handleSubmit, control } = useForm({});
 
 	const onSubmit = (data: any) => {
 		console.log(data);
@@ -57,17 +62,19 @@ export const GreatSampleForm = () => {
 					autoComplete='postal-code'
 					{...register("postcode")}
 				/>
-				<RHFTextInput id='country' label='Country' {...register("country")} />
+				<RHFControllerTextInput id='country' label='Country' name='country' control={control} />
 			</fieldset>
 			<fieldset className={css.fieldset}>
 				<RHFToggleInput
 					id='status'
 					label='Status'
-					hideLabel
 					statusText={watch("status") ? "Active" : "Inactive"}
 					{...register("status")}
 				/>
+				<RHFControllerToggleInput id='control' label='Control' name='control' control={control} />
 			</fieldset>
+			<CheckboxInput label='Checkbox' id='checkbox' name='checkbox' />
+			<button type='submit'>s</button>
 		</form>
 	);
 };
