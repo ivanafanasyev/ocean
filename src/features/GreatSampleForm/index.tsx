@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
-import { CheckboxInput } from "../../shared/ui/atoms/inputs/CheckboxInput";
-
+import { RHFCheckboxInput } from "../../shared/ui/atoms/inputs/CheckboxInput/RHFControllerInput";
 import { RHFControllerTextInput } from "../../shared/ui/atoms/inputs/TextInput/RHFControllerTextInput";
 import { RHFTextInput } from "../../shared/ui/atoms/inputs/TextInput/RHFTextInput";
 import { RHFControllerToggleInput } from "../../shared/ui/atoms/inputs/ToggleInput/RHFControllerToggleInput";
@@ -73,7 +72,12 @@ export const GreatSampleForm = () => {
 				/>
 				<RHFControllerToggleInput id='control' label='Control' name='control' control={control} />
 			</fieldset>
-			<CheckboxInput label='Checkbox' id='checkbox' name='checkbox' />
+			<RHFCheckboxInput
+				label='Checkbox'
+				id='checkbox'
+				text='I am agree with smth'
+				{...register("checkbox")}
+			/>
 			<button type='submit'>s</button>
 		</form>
 	);

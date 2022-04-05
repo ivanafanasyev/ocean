@@ -19,6 +19,10 @@
 	display: flex;
 	flex-flow: row nowrap;
 }
+.text {
+	margin: 0 0 0 1rem;
+	align-self: center;
+}
 .checkbox {
 	display: inline-block;
 	position: relative;
