@@ -1,4 +1,5 @@
 import { ComponentProps, FC, ForwardedRef } from "react";
+import cn from "classnames";
 
 import css from "./index.module.css";
 
@@ -7,12 +8,16 @@ export type TextInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "name"
 	name: string;
 	label: string;
 	hideLabel?: boolean;
-	wrapClassName?: string;
-	labelClassName?: string;
-	errorClassName?: string;
-	error?: string | null;
-	icon?: JSX.Element | React.ReactNode;
-	iconWrapClassName?: string;
+	wrapCN?: string;
+	labelCN?: string;
+	validationMsg?: string | JSX.Element | null;
+	validationMsgCN?: string;
+	validationMsgIsError?: boolean;
+	validationMsgIsSuccess?: boolean;
+	leadingIcon?: JSX.Element | React.ReactNode;
+	leadingIconWrapCN?: string;
+	trailingIcon?: JSX.Element | React.ReactNode;
+	trailingIconWrapCN?: string;
 	reassignedRef?: ForwardedRef<HTMLInputElement> | React.LegacyRef<HTMLInputElement> | undefined;
 };
 
@@ -22,34 +27,44 @@ export const TextInput: FC<TextInputProps> = ({
 	className,
 	label,
 	hideLabel = false,
-	wrapClassName,
-	labelClassName,
-	errorClassName,
-	error,
-	icon,
+	wrapCN,
+	labelCN,
+	validationMsg,
+	validationMsgCN,
+	validationMsgIsError,
+	validationMsgIsSuccess,
+	leadingIcon,
+	leadingIconWrapCN,
+	trailingIcon,
 	required,
-	iconWrapClassName,
+	trailingIconWrapCN,
 	reassignedRef,
 	...props
 }: TextInputProps) => (
-	<div className={wrapClassName ? `${css.inputbox} ${wrapClassName}` : css.inputbox}>
-		<label
-			className={labelClassName ? `${css.label} ${labelClassName}` : css.label}
-			data-hiddenlabel={hideLabel}
-			htmlFor={id}
-		>
+	<div className={cn(css.inputbox, wrapCN)}>
+		<label className={cn(css.label, labelCN)} data-hiddenlabel={hideLabel} htmlFor={id}>
 			{label}
 		</label>
-		<input
-			aria-invalid={error ? "true" : "false"}
-			aria-required={required ? "true" : "false"}
-			className={className ? `${css.input} ${className}` : css.input}
-			type={type}
-			ref={reassignedRef}
-			id={id}
-			{...props}
-		/>
-		{icon}
-		<p className={errorClassName ? `${css.error} ${errorClassName}` : css.error}>{error}</p>
+		<div className={css.relativewrap}>
+			<div className={cn(css.leadingicon, leadingIconWrapCN)}>{leadingIcon}</div>
+			<input
+				aria-invalid={validationMsgIsError && validationMsg ? "true" : "false"}
+				aria-required={required ? "true" : "false"}
+				className={cn(css.input, className)}
+				type={type}
+				ref={reassignedRef}
+				id={id}
+				required={required}
+				{...props}
+			/>
+			<div className={cn(css.trailingicon, trailingIconWrapCN)}>{trailingIcon}</div>
+		</div>
+		<p
+			className={cn(css.validationMsg, validationMsgCN)}
+			data-iserror={validationMsgIsError}
+			data-issuccess={validationMsgIsSuccess}
+		>
+			{validationMsg}
+		</p>
 	</div>
 );

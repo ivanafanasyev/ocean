@@ -26,9 +26,10 @@
 .checkbox {
 	display: inline-block;
 	position: relative;
+	cursor: pointer;
 	width: var(--checkbox-size);
 	height: var(--checkbox-size);
-	cursor: pointer;
+	flex-shrink: 0;
 }
 .checkbox input {
 	display: none;
@@ -63,4 +64,8 @@
 }
 .checkbox input:checked ~ .checkmark::after {
 	opacity: 1;
+}
+.checkbox:focus-visible > .checkmark {
+	background-color: var(--bg-color-hover);
+	border: 1px solid var(--text);
 }

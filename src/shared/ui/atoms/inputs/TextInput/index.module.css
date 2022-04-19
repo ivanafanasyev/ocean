@@ -1,6 +1,17 @@
 .inputbox {
 	position: relative;
 }
+.relativewrap {
+	position: relative;
+	/* Input height */
+	height: 40px;
+}
+.leadingicon {
+	position: absolute;
+}
+.trailingicon {
+	position: absolute;
+}
 .label {
 	margin: 0 0 8px 0;
 }
@@ -20,28 +31,37 @@
 	box-sizing: border-box;
 	border-color: var(--silver);
 	background-color: var(--white);
-	height: 40px;
+	height: 100%;
 	width: 100%;
 	padding: 0 12px 0 12px;
 	border-radius: 4px;
 	font-size: 14px;
 	color: var(--input-color);
+	outline: none;
 }
 .input::placeholder {
 	color: var(--silver);
 }
-.input:focus {
+.input:focus,
+.input:focus-visible {
 	border-color: var(--text);
+	border-width: 2px;
 }
 .input:disabled {
-	background-color: eef1f5;
+	background-color: #eef1f5;
 }
 .input[aria-invalid="true"] {
 	border-color: var(--red);
 	color: var(--red);
 }
-.error {
+.validationMsg {
 	position: absolute;
-	top: calc(100% + 8px);
+	top: calc(100% + 2px);
+	color: var(--active-blue);
+}
+.validationMsg[data-iserror="true"] {
 	color: var(--red);
+}
+.validationMsg[data-issuccess="true"] {
+	color: var(--green);
 }

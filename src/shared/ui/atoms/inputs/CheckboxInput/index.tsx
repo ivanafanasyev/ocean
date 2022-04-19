@@ -1,4 +1,4 @@
-import { ComponentProps, FC, ForwardedRef } from "react";
+import { ComponentProps, FC, ForwardedRef, forwardRef, KeyboardEvent, useRef } from "react";
 import css from "./index.module.css";
 
 export type CheckboxInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "name"> & {
@@ -27,6 +27,15 @@ export const CheckboxInput: FC<CheckboxInputProps> = ({
 	textClassName,
 	...props
 }: CheckboxInputProps) => {
+	const labelRef = useRef<HTMLLabelElement>(null);
+	const handleCheckbox = (e: KeyboardEvent<HTMLLabelElement>) => {
+		let isEnterOrSpace = e.code === "Enter" || e.code === "Space";
+		if (isEnterOrSpace) {
+			e.preventDefault(); //stop scroll the page
+			labelRef.current?.click();
+		}
+	};
+
 	return (
 		<div className={wrapClassName ? `${css.wrap} ${wrapClassName}` : css.wrap}>
 			<p
@@ -36,15 +45,14 @@ export const CheckboxInput: FC<CheckboxInputProps> = ({
 				{label}
 			</p>
 			<div className={blockClassName ? `${css.block} ${blockClassName}` : css.block}>
-				<label htmlFor={id} className={css.checkbox}>
-					<input
-						type='checkbox'
-						ref={reassignedRef}
-						id={id}
-						onChange={onChange}
-						tabIndex={0}
-						{...props}
-					/>
+				<label
+					htmlFor={id}
+					className={css.checkbox}
+					tabIndex={0}
+					ref={labelRef}
+					onKeyDown={handleCheckbox}
+				>
+					<input type='checkbox' ref={reassignedRef} id={id} onChange={onChange} {...props} />
 					<div className={css.checkmark}></div>
 				</label>
 				<p className={textClassName ? `${css.text} ${textClassName}` : css.text}>{text}</p>

@@ -27,6 +27,12 @@
 .switch input {
 	display: none;
 }
+.switch:focus-visible {
+	outline: none;
+}
+.switch:focus-visible > .slider {
+	border: 1px solid var(--text);
+}
 .slider {
 	background-color: var(--invactive-color);
 	bottom: 0;
