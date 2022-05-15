@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -7,8 +8,17 @@ import { RHFControllerTextInput } from "../../shared/ui/atoms/inputs/TextInput/R
 import { RHFTextInput } from "../../shared/ui/atoms/inputs/TextInput/RHFTextInput";
 import { RHFControllerToggleInput } from "../../shared/ui/atoms/inputs/ToggleInput/RHFControllerToggleInput";
 import { RHFToggleInput } from "../../shared/ui/atoms/inputs/ToggleInput/RHFToggleInput";
+import { RHFControllerSelectInput } from "../../shared/ui/atoms/inputs/SelectInput/RHFControlSelectInput";
 
 import css from "./index.module.css";
+
+type CountryType = {
+	code: string;
+	emoji: string;
+	image: string;
+	name: string;
+	unicode: string;
+};
 
 interface IFormInputs {
 	firstname: string;
@@ -18,7 +28,7 @@ interface IFormInputs {
 	address: string;
 	postcode: string;
 	city: string;
-	country: string;
+	country: CountryType;
 	control: boolean;
 	status: boolean;
 	checkbox: boolean;
@@ -33,7 +43,7 @@ const schema = yup
 		address: yup.string().required(),
 		postcode: yup.string().required(),
 		city: yup.string().required(),
-		country: yup.string().required(),
+		// country: yup.string().required(),
 		control: yup.boolean(),
 		status: yup.boolean(),
 		checkbox: yup.boolean(),
@@ -55,6 +65,17 @@ export const GreatSampleForm = () => {
 	} = useForm<IFormInputs>({
 		resolver: yupResolver(schema),
 	});
+
+	const [data, setData] = useState<CountryType[]>([]);
+	useEffect(() => {
+		fetch("https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/index.json")
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (data: CountryType[]) {
+				setData(data);
+			});
+	}, []);
 
 	const onSubmit = (data: IFormInputs) => {
 		console.log(data);
@@ -127,13 +148,16 @@ export const GreatSampleForm = () => {
 					validationMsg={errors.postcode?.message}
 					validationMsgIsError
 				/>
-				<RHFControllerTextInput
+				<RHFControllerSelectInput
 					id='country'
 					label='Country'
 					name='country'
 					control={control}
-					validationMsg={errors.country?.message}
-					validationMsgIsError
+					options={data}
+					getOptionValue={(o: any) => o.code}
+					getOptionLabel={(o: any) => `${o.emoji} ${o.name}`}
+					// validationMsg={errors.country?.message}
+					// validationMsgIsError
 				/>
 			</fieldset>
 			<fieldset className={css.fieldset}>

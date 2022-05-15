@@ -5,6 +5,9 @@
 	--checkmark-color: #ffffff;
 	--checkbox-size: 24px;
 }
+.label {
+	margin: 0 0 0.5em 0;
+}
 .label[data-hiddenlabel="true"] {
 	position: absolute;
 	width: 1px;

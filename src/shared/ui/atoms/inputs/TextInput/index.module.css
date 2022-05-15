@@ -13,7 +13,8 @@
 	position: absolute;
 }
 .label {
-	margin: 0 0 8px 0;
+	display: block;
+	margin: 0 0 0.5em 0;
 }
 .label[data-hiddenlabel="true"] {
 	position: absolute;
@@ -29,7 +30,7 @@
 	position: relative;
 	border: 1px solid;
 	box-sizing: border-box;
-	border-color: var(--silver);
+	border-color: var(--grey-text);
 	background-color: var(--white);
 	height: 100%;
 	width: 100%;
@@ -40,12 +41,12 @@
 	outline: none;
 }
 .input::placeholder {
-	color: var(--silver);
+	color: var(--grey-text);
 }
 .input:focus,
 .input:focus-visible {
 	border-color: var(--text);
-	border-width: 2px;
+	border-width: 1px;
 }
 .input:disabled {
 	background-color: #eef1f5;

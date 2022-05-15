@@ -1,4 +1,5 @@
-import { ComponentProps, FC, ForwardedRef, forwardRef, KeyboardEvent, useRef } from "react";
+import { ComponentProps, FC, ForwardedRef, KeyboardEvent, useRef } from "react";
+import cn from "classnames";
 import css from "./index.module.css";
 
 export type CheckboxInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "name"> & {
@@ -37,14 +38,11 @@ export const CheckboxInput: FC<CheckboxInputProps> = ({
 	};
 
 	return (
-		<div className={wrapClassName ? `${css.wrap} ${wrapClassName}` : css.wrap}>
-			<p
-				data-hiddenlabel={hideLabel}
-				className={labelClassName ? `${css.label} ${labelClassName}` : css.label}
-			>
+		<div className={cn(css.wrap, wrapClassName)}>
+			<p data-hiddenlabel={hideLabel} className={cn(css.label, labelClassName)}>
 				{label}
 			</p>
-			<div className={blockClassName ? `${css.block} ${blockClassName}` : css.block}>
+			<div className={cn(css.block, blockClassName)}>
 				<label
 					htmlFor={id}
 					className={css.checkbox}
@@ -55,7 +53,7 @@ export const CheckboxInput: FC<CheckboxInputProps> = ({
 					<input type='checkbox' ref={reassignedRef} id={id} onChange={onChange} {...props} />
 					<div className={css.checkmark}></div>
 				</label>
-				<p className={textClassName ? `${css.text} ${textClassName}` : css.text}>{text}</p>
+				<p className={cn(css.text, textClassName)}>{text}</p>
 			</div>
 		</div>
 	);
