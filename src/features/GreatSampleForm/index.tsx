@@ -11,6 +11,7 @@ import { RHFToggleInput } from "../../shared/ui/atoms/inputs/ToggleInput/RHFTogg
 import { RHFControllerSelectInput } from "../../shared/ui/atoms/inputs/SelectInput/RHFControlSelectInput";
 
 import css from "./index.module.css";
+import { RHFRadioGroup } from "../../shared/ui/atoms/inputs/RadioGroupInput/RHFRadioGroup";
 
 type CountryType = {
 	code: string;
@@ -32,6 +33,7 @@ interface IFormInputs {
 	control: boolean;
 	status: boolean;
 	checkbox: boolean;
+	testcustomradiogroup: any;
 }
 
 const schema = yup
@@ -168,7 +170,29 @@ export const GreatSampleForm = () => {
 					{...register("status")}
 				/>
 				<RHFControllerToggleInput id='control' label='Control' name='control' control={control} />
+				<RHFRadioGroup
+					label='TestRadio'
+					inputs={[
+						{
+							label: "customtest1",
+							value: "customtest1value",
+							key: "customtest1key",
+						},
+						{
+							label: "customtest2",
+							value: "customtest2value",
+							key: "customtest2key",
+						},
+						{
+							label: "customtest3",
+							value: "customtest3value",
+							key: "customtest3key",
+						},
+					]}
+					{...register("testcustomradiogroup")}
+				/>
 			</fieldset>
+
 			<RHFCheckboxInput
 				label='Checkbox'
 				id='checkbox'
