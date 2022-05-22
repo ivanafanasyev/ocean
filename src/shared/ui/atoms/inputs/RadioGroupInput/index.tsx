@@ -34,7 +34,6 @@ export const RadioGroup = ({
 	const labelRef = useRef<Array<HTMLLabelElement | null>>([]);
 	const handleCheckbox = (e: KeyboardEvent<HTMLLabelElement>, index: number) => {
 		let isEnterOrSpace = e.code === "Enter" || e.code === "Space";
-		console.log(isEnterOrSpace);
 		if (isEnterOrSpace) {
 			e.preventDefault(); //stop scroll the page
 			labelRef.current[index]?.click();

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -12,6 +12,9 @@ import { RHFControllerSelectInput } from "../../shared/ui/atoms/inputs/SelectInp
 
 import css from "./index.module.css";
 import { RHFRadioGroup } from "../../shared/ui/atoms/inputs/RadioGroupInput/RHFRadioGroup";
+import { RHFClassicRG } from "../../shared/ui/atoms/inputs/ClassicRadioGroupInput/RHFClassicRG";
+import { RHFClassicCheckbox } from "../../shared/ui/atoms/inputs/ClassicCheckboxInput/RHFClassicCheckbox";
+import { VSelectInput } from "../../shared/ui/atoms/inputs/VSelectInput";
 
 type CountryType = {
 	code: string;
@@ -34,6 +37,8 @@ interface IFormInputs {
 	status: boolean;
 	checkbox: boolean;
 	testcustomradiogroup: any;
+	testclassicrg: any;
+	classiccheckbox: boolean;
 }
 
 const schema = yup
@@ -161,6 +166,14 @@ export const GreatSampleForm = () => {
 					// validationMsg={errors.country?.message}
 					// validationMsgIsError
 				/>
+				<VSelectInput
+					id='country'
+					label='Country'
+					name='country'
+					options={data}
+					getOptionValue={(o: any) => o.code}
+					getOptionLabel={(o: any) => `${o.emoji} ${o.name}`}
+				/>
 			</fieldset>
 			<fieldset className={css.fieldset}>
 				<RHFToggleInput
@@ -192,15 +205,42 @@ export const GreatSampleForm = () => {
 					{...register("testcustomradiogroup")}
 				/>
 			</fieldset>
+			<fieldset className={css.fieldset}>
+				<RHFClassicRG
+					groupLabel='TestRadio'
+					inputs={[
+						{
+							label: "customtest1",
+							value: "customtest1value",
+						},
+						{
+							label: "customtest2",
+							value: "customtest2value",
+						},
+						{
+							label: "customtest3",
+							value: "customtest3value",
+						},
+					]}
+					{...register("testclassicrg")}
+				/>
+			</fieldset>
+			<fieldset className={css.fieldset}>
+				<RHFCheckboxInput
+					label='Checkbox'
+					id='checkbox'
+					text={POLICIES_TEXT}
+					{...register("checkbox")}
+				/>
+				<RHFClassicCheckbox
+					label='HTML based checkbox'
+					id='htmlcheckbox'
+					txt={POLICIES_TEXT}
+					{...register("classiccheckbox")}
+				/>
+			</fieldset>
 
-			<RHFCheckboxInput
-				label='Checkbox'
-				id='checkbox'
-				text={POLICIES_TEXT}
-				{...register("checkbox")}
-			/>
-
-			<button type='submit'>s</button>
+			<button type='submit'>submit</button>
 		</form>
 	);
 };

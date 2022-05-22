@@ -9,10 +9,10 @@ export type CheckboxInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "n
 	text?: string | JSX.Element;
 	hideLabel?: boolean;
 	reassignedRef?: ForwardedRef<HTMLInputElement> | React.LegacyRef<HTMLInputElement> | undefined;
-	wrapClassName?: string;
-	labelClassName?: string;
-	blockClassName?: string;
-	textClassName?: string;
+	wrapCN?: string;
+	labelCN?: string;
+	blockCN?: string;
+	txtCN?: string;
 };
 
 export const CheckboxInput: FC<CheckboxInputProps> = ({
@@ -22,10 +22,10 @@ export const CheckboxInput: FC<CheckboxInputProps> = ({
 	label,
 	text,
 	hideLabel = false,
-	wrapClassName,
-	labelClassName,
-	blockClassName,
-	textClassName,
+	wrapCN,
+	labelCN,
+	blockCN,
+	txtCN,
 	...props
 }: CheckboxInputProps) => {
 	const labelRef = useRef<HTMLLabelElement>(null);
@@ -38,11 +38,11 @@ export const CheckboxInput: FC<CheckboxInputProps> = ({
 	};
 
 	return (
-		<div className={cn(css.wrap, wrapClassName)}>
-			<p data-hiddenlabel={hideLabel} className={cn(css.label, labelClassName)}>
+		<div className={cn(css.wrap, wrapCN)}>
+			<p data-hiddenlabel={hideLabel} className={cn(css.label, labelCN)}>
 				{label}
 			</p>
-			<div className={cn(css.block, blockClassName)}>
+			<div className={cn(css.block, blockCN)}>
 				<label
 					htmlFor={id}
 					className={css.checkbox}
@@ -53,7 +53,7 @@ export const CheckboxInput: FC<CheckboxInputProps> = ({
 					<input type='checkbox' ref={reassignedRef} id={id} onChange={onChange} {...props} />
 					<div className={css.checkmark}></div>
 				</label>
-				<p className={cn(css.text, textClassName)}>{text}</p>
+				<p className={cn(css.text, txtCN)}>{text}</p>
 			</div>
 		</div>
 	);
