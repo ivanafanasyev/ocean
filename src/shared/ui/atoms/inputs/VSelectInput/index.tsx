@@ -8,6 +8,7 @@ import { MenuList } from "./MenuList";
 import { getHighlightedText } from "../../../../lib/utils/getHighlightText";
 
 import css from "./index.module.css";
+import { FieldWrap, FieldWrapProps } from "../../FieldWrap";
 
 const Option = ({ children, ...props }: OptionProps) => {
 	// eslint-disable-next-line no-unused-vars
@@ -21,13 +22,11 @@ const Option = ({ children, ...props }: OptionProps) => {
 	);
 };
 
-export type SelectInputProps = Omit<StateManagerProps, "name" | "id"> & {
-	name: string;
-	id: string;
-	label: string;
-	hideLabel?: boolean;
-	className?: string;
-};
+export type SelectInputProps = Omit<StateManagerProps, "name" | "id"> &
+	FieldWrapProps & {
+		name: string;
+		className?: string;
+	};
 
 export const VSelectInput: FC<SelectInputProps> = ({
 	name,
@@ -36,13 +35,20 @@ export const VSelectInput: FC<SelectInputProps> = ({
 	hideLabel,
 	className,
 	options,
+	validationMsg,
+	validationMsgIsError,
+	validationMsgIsSuccess,
 	...props
 }) => {
 	return (
-		<div className={css.wrap}>
-			<label data-hiddenlabel={hideLabel} className={css.label} htmlFor={id}>
-				{label}
-			</label>
+		<FieldWrap
+			label={label}
+			id={id}
+			hideLabel={hideLabel}
+			validationMsg={validationMsg}
+			validationMsgIsError={validationMsgIsError}
+			validationMsgIsSuccess={validationMsgIsSuccess}
+		>
 			<Select
 				captureMenuScroll={false}
 				components={{ Option, MenuList: MenuList }}
@@ -55,7 +61,6 @@ export const VSelectInput: FC<SelectInputProps> = ({
 				options={options}
 				{...props}
 			/>
-			<div></div>
-		</div>
+		</FieldWrap>
 	);
 };

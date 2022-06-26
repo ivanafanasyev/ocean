@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { GreatSampleForm } from "../features/GreatSampleForm";
+import { RegistrationFormSample } from "../features/RegistrationFormSample";
 
 const FormPage: NextPage = () => {
 	return (
@@ -9,7 +9,7 @@ const FormPage: NextPage = () => {
 				<title>Form Best Practices</title>
 			</Head>
 			<main>
-				<GreatSampleForm />
+				<RegistrationFormSample />
 			</main>
 		</>
 	);

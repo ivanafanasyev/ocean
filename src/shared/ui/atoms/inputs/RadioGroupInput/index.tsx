@@ -2,6 +2,8 @@ import { ComponentProps, ForwardedRef, KeyboardEvent, useRef } from "react";
 import cn from "classnames";
 
 import css from "./index.module.css";
+import { FieldWrap, FieldWrapProps } from "../../FieldWrap";
+import { validationMsg } from "../../FieldWrap/index.module.css";
 
 export type RadioGroupInputType = {
 	value: string;
@@ -9,18 +11,12 @@ export type RadioGroupInputType = {
 	key: string;
 };
 
-export interface IRadioGroup extends Omit<ComponentProps<"input">, "id" | "ref" | "name"> {
-	name: string;
-	hideLabel?: boolean;
-	label: string;
-	inputs: Array<RadioGroupInputType>;
-	wrapCN?: string;
-	reassignedRef?: ForwardedRef<HTMLInputElement> | React.LegacyRef<HTMLInputElement> | undefined;
-	validationMsg?: string | JSX.Element | null;
-	validationMsgCN?: string;
-	validationMsgIsError?: boolean;
-	validationMsgIsSuccess?: boolean;
-}
+export type IRadioGroup = Omit<ComponentProps<"input">, "id" | "ref" | "name"> &
+	Omit<FieldWrapProps, "id"> & {
+		name: string;
+		inputs: Array<RadioGroupInputType>;
+		reassignedRef?: ForwardedRef<HTMLInputElement> | React.LegacyRef<HTMLInputElement> | undefined;
+	};
 
 export const RadioGroup = ({
 	hideLabel = false,
@@ -28,7 +24,9 @@ export const RadioGroup = ({
 	inputs,
 	reassignedRef,
 	onChange,
-	wrapCN,
+	validationMsg,
+	validationMsgIsError,
+	validationMsgIsSuccess,
 	...props
 }: IRadioGroup) => {
 	const labelRef = useRef<Array<HTMLLabelElement | null>>([]);
@@ -41,10 +39,15 @@ export const RadioGroup = ({
 	};
 
 	return (
-		<div className={cn(css["radio-group-box"], wrapCN)}>
-			<p className={css.label} data-hiddenlabel={hideLabel}>
-				{label}
-			</p>
+		<FieldWrap
+			label={label}
+			hideLabel={hideLabel}
+			id={props.name}
+			validationMsg={validationMsg}
+			validationMsgIsError={validationMsgIsError}
+			validationMsgIsSuccess={validationMsgIsSuccess}
+			className={css["radio-group-box"]}
+		>
 			<div className={css.group}>
 				{inputs.map((input, index) => (
 					<div className={css["radio-block"]} key={`${label}${input.label}${input.key}`}>
@@ -69,6 +72,6 @@ export const RadioGroup = ({
 					</div>
 				))}
 			</div>
-		</div>
+		</FieldWrap>
 	);
 };

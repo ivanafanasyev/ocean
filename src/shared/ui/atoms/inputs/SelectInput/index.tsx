@@ -6,6 +6,7 @@ import { StateManagerProps } from "react-select/dist/declarations/src/useStateMa
 import { getHighlightedText } from "../../../../lib/utils/getHighlightText";
 
 import css from "./index.module.css";
+import { FieldWrap, FieldWrapProps } from "../../FieldWrap";
 
 const Option = ({ children, ...props }: OptionProps) => {
 	return (
@@ -15,15 +16,11 @@ const Option = ({ children, ...props }: OptionProps) => {
 	);
 };
 
-export type SelectInputProps = Omit<StateManagerProps, "name" | "id"> & {
-	name: string;
-	id: string;
-	label: string;
-	hideLabel?: boolean;
-	className?: string;
-	wrapCN?: string;
-	labelCN?: string;
-};
+export type SelectInputProps = Omit<StateManagerProps, "name" | "id"> &
+	FieldWrapProps & {
+		name: string;
+		className?: string;
+	};
 
 export const SelectInput: FC<SelectInputProps> = ({
 	name,
@@ -32,15 +29,20 @@ export const SelectInput: FC<SelectInputProps> = ({
 	hideLabel,
 	className,
 	options,
-	wrapCN,
-	labelCN,
+	validationMsg,
+	validationMsgIsError,
+	validationMsgIsSuccess,
 	...props
 }) => {
 	return (
-		<div className={cn(css.inputbox, wrapCN)}>
-			<label className={cn(css.label, labelCN)} data-hiddenlabel={hideLabel} htmlFor={id}>
-				{label}
-			</label>
+		<FieldWrap
+			id={id}
+			label={label}
+			hideLabel={hideLabel}
+			validationMsg={validationMsg}
+			validationMsgIsError={validationMsgIsError}
+			validationMsgIsSuccess={validationMsgIsSuccess}
+		>
 			<Select
 				className={cn(css.select, className)}
 				classNamePrefix={"r-select"}
@@ -51,6 +53,6 @@ export const SelectInput: FC<SelectInputProps> = ({
 				instanceId={id}
 				{...props}
 			/>
-		</div>
+		</FieldWrap>
 	);
 };

@@ -1,0 +1,25 @@
+.form {
+	width: 90vw;
+	margin: 36px auto 72px;
+	display: grid;
+	grid-template-columns: 1fr;
+	row-gap: 28px;
+}
+.birthdatefieldset {
+	border: none;
+
+	display: grid;
+	width: 100%;
+	row-gap: 0.5rem;
+	column-gap: 1rem;
+	grid-template-columns: 1fr 1fr 4fr;
+}
+.birthdatefieldset legend {
+	display: block;
+	margin: 0 0 0.25rem 0;
+	color: #000000;
+	letter-spacing: 0.01em;
+	font-weight: 500;
+	grid-column: 1/4;
+	text-transform: capitalize;
+}
