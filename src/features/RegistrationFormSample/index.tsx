@@ -3,17 +3,17 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { RHFCheckboxInput } from "../../shared/ui/atoms/inputs/CheckboxInput/RHFControllerInput";
-import { RHFControllerTextInput } from "../../shared/ui/atoms/inputs/TextInput/RHFControllerTextInput";
-import { RHFTextInput } from "../../shared/ui/atoms/inputs/TextInput/RHFTextInput";
-import { RHFControllerToggleInput } from "../../shared/ui/atoms/inputs/ToggleInput/RHFControllerToggleInput";
-import { RHFToggleInput } from "../../shared/ui/atoms/inputs/ToggleInput/RHFToggleInput";
-import { RHFControllerSelectInput } from "../../shared/ui/atoms/inputs/SelectInput/RHFControlSelectInput";
-import { TextareaRHF } from "../../shared/ui/atoms/inputs/Textarea/TextareaRHF";
-import { RHFRadioGroup } from "../../shared/ui/atoms/inputs/RadioGroupInput/RHFRadioGroup";
-import { RHFClassicRG } from "../../shared/ui/atoms/inputs/ClassicRadioGroupInput/RHFClassicRG";
-import { RHFClassicCheckbox } from "../../shared/ui/atoms/inputs/ClassicCheckboxInput/RHFClassicCheckbox";
-import { VSelectInput } from "../../shared/ui/atoms/inputs/VSelectInput";
+import { RHFCheckboxInput } from "../../shared/ui/molecules/inputs/CheckboxInput/RHFControllerInput";
+import { RHFControllerTextInput } from "../../shared/ui/molecules/inputs/TextInput/RHFControllerTextInput";
+import { RHFTextInput } from "../../shared/ui/molecules/inputs/TextInput/RHFTextInput";
+import { RHFControllerToggleInput } from "../../shared/ui/molecules/inputs/ToggleInput/RHFControllerToggleInput";
+import { RHFToggleInput } from "../../shared/ui/molecules/inputs/ToggleInput/RHFToggleInput";
+import { RHFControllerSelectInput } from "../../shared/ui/molecules/inputs/SelectInput/RHFControlSelectInput";
+import { TextareaRHF } from "../../shared/ui/molecules/inputs/Textarea/TextareaRHF";
+import { RHFRadioGroup } from "../../shared/ui/molecules/inputs/RadioGroupInput/RHFRadioGroup";
+import { RHFClassicRG } from "../../shared/ui/molecules/inputs/ClassicRadioGroupInput/RHFClassicRG";
+import { RHFClassicCheckbox } from "../../shared/ui/molecules/inputs/ClassicCheckboxInput/RHFClassicCheckbox";
+import { VSelectInput } from "../../shared/ui/molecules/inputs/VSelectInput";
 
 import css from "./index.module.css";
 import { BioForm } from "./features/BioForm";

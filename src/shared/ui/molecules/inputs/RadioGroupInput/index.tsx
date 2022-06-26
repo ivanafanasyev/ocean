@@ -2,7 +2,7 @@ import { ComponentProps, ForwardedRef, KeyboardEvent, useRef } from "react";
 import cn from "classnames";
 
 import css from "./index.module.css";
-import { FieldWrap, FieldWrapProps } from "../../FieldWrap";
+import { FieldWrap, FieldWrapProps } from "../../../atoms/FieldWrap";
 import { validationMsg } from "../../FieldWrap/index.module.css";
 
 export type RadioGroupInputType = {

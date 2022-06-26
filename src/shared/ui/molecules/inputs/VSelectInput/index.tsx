@@ -1,16 +1,22 @@
 import { FC } from "react";
 import cn from "classnames";
-import Select, { components, OptionProps } from "react-select";
+// https://react-select.com/async#defaultoptions
+import Select, { components, createFilter, OptionProps } from "react-select";
 import { StateManagerProps } from "react-select/dist/declarations/src/useStateManager";
+import { MenuList } from "./MenuList";
 
 import { getHighlightedText } from "../../../../lib/utils/getHighlightText";
 
 import css from "./index.module.css";
-import { FieldWrap, FieldWrapProps } from "../../FieldWrap";
+import { FieldWrap, FieldWrapProps } from "../../../atoms/FieldWrap";
 
 const Option = ({ children, ...props }: OptionProps) => {
+	// eslint-disable-next-line no-unused-vars
+	const { onMouseMove, onMouseOver, ...rest } = props.innerProps;
+	const newProps = { ...props, innerProps: rest };
+
 	return (
-		<components.Option {...props}>
+		<components.Option {...newProps}>
 			{getHighlightedText(String(children), props.selectProps.inputValue)}
 		</components.Option>
 	);
@@ -22,7 +28,7 @@ export type SelectInputProps = Omit<StateManagerProps, "name" | "id"> &
 		className?: string;
 	};
 
-export const SelectInput: FC<SelectInputProps> = ({
+export const VSelectInput: FC<SelectInputProps> = ({
 	name,
 	id,
 	label,
@@ -36,21 +42,23 @@ export const SelectInput: FC<SelectInputProps> = ({
 }) => {
 	return (
 		<FieldWrap
-			id={id}
 			label={label}
+			id={id}
 			hideLabel={hideLabel}
 			validationMsg={validationMsg}
 			validationMsgIsError={validationMsgIsError}
 			validationMsgIsSuccess={validationMsgIsSuccess}
 		>
 			<Select
+				captureMenuScroll={false}
+				components={{ Option, MenuList: MenuList }}
 				className={cn(css.select, className)}
-				classNamePrefix={"r-select"}
-				name={name}
-				options={options}
-				components={{ Option }}
+				classNamePrefix={"rv-select"}
+				filterOption={createFilter({ ignoreAccents: false })} //for avoid calling a function stripDiactricts
 				id={id}
 				instanceId={id}
+				name={name}
+				options={options}
 				{...props}
 			/>
 		</FieldWrap>

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { RHFRadioGroup } from "../../../../shared/ui/atoms/inputs/RadioGroupInput/RHFRadioGroup";
+import { RHFRadioGroup } from "../../../../shared/ui/molecules/inputs/RadioGroupInput/RHFRadioGroup";
 
-import { RHFControllerSelectInput } from "../../../../shared/ui/atoms/inputs/SelectInput/RHFControlSelectInput";
-import { RHFControllerTextInput } from "../../../../shared/ui/atoms/inputs/TextInput/RHFControllerTextInput";
-import { RHFTextInput } from "../../../../shared/ui/atoms/inputs/TextInput/RHFTextInput";
+import { RHFControllerSelectInput } from "../../../../shared/ui/molecules/inputs/SelectInput/RHFControlSelectInput";
+import { RHFControllerTextInput } from "../../../../shared/ui/molecules/inputs/TextInput/RHFControllerTextInput";
+import { RHFTextInput } from "../../../../shared/ui/molecules/inputs/TextInput/RHFTextInput";
 
 import css from "./index.module.css";
 

@@ -2,7 +2,7 @@ import { ComponentProps, FC, ForwardedRef } from "react";
 import cn from "classnames";
 
 import css from "./index.module.css";
-import { FieldWrap } from "../../FieldWrap";
+import { FieldWrap } from "../../../atoms/FieldWrap";
 
 export type TextInputProps = Omit<ComponentProps<"input">, "id" | "ref" | "name"> & {
 	id: string;
