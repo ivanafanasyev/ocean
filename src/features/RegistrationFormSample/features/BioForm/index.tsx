@@ -1,7 +1,11 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { RHFRadioGroup } from "../../../../shared/ui/molecules/inputs/RadioGroupInput/RHFRadioGroup";
+import { object, string } from "yup";
+import { preventDefaultForKey } from "../../../../shared/lib/utils/checkKeyDown";
 
+import { Button } from "../../../../shared/ui/atoms/Button";
+import { RHFRadioGroup } from "../../../../shared/ui/molecules/inputs/RadioGroupInput/RHFRadioGroup";
 import { RHFControllerSelectInput } from "../../../../shared/ui/molecules/inputs/SelectInput/RHFControlSelectInput";
 import { RHFControllerTextInput } from "../../../../shared/ui/molecules/inputs/TextInput/RHFControllerTextInput";
 import { RHFTextInput } from "../../../../shared/ui/molecules/inputs/TextInput/RHFTextInput";
@@ -20,8 +24,35 @@ type Props = {
 	onNext?: () => void;
 };
 
+type BioFormFields = {
+	fullname: string;
+	email: string;
+	nationality: CountryType;
+	birthday: string;
+	birthmonth: string;
+	birthyear: string;
+	gender: string;
+};
+
+const validationSchema = object({
+	fullname: string().required(),
+	email: string().email().required(),
+	nationality: object().required(),
+	birthday: string().required(),
+	birthmonth: string().required(),
+	birthyear: string().required(),
+	gender: string().required(),
+}).required();
+
 export const BioForm = (onNext: Props) => {
-	const { register, control } = useForm();
+	const {
+		register,
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<BioFormFields>({
+		resolver: yupResolver(validationSchema),
+	});
 	const [countries, setCountries] = useState<CountryType[]>([]);
 	const [isLoading, setLoading] = useState(true);
 	useEffect(() => {
@@ -37,14 +68,32 @@ export const BioForm = (onNext: Props) => {
 			});
 	}, []);
 
+	// Don't forget to type the data
+	const onSubmit = (data: BioFormFields) => {
+		// Time to time back-end has it own format for request, modify data here
+		let { birthday, birthmonth, birthyear, nationality, ...restData } = data;
+		const resultObj = {
+			...restData,
+			nationality: nationality.code,
+			birthdate: new Date(Number(birthyear), Number(birthmonth) - 1, Number(birthday)),
+		};
+	};
+
 	return (
-		<form className={css.form}>
-			<RHFTextInput type='text' label='Fullname' id='fullname' {...register("fullname")} />
+		<form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+			<RHFTextInput
+				type='text'
+				label='Fullname'
+				id='fullname'
+				validationMsg={errors?.fullname?.message}
+				{...register("fullname")}
+			/>
 			<RHFTextInput
 				type='email'
 				label='Email'
 				id='email'
 				inputMode='email'
+				validationMsg={errors?.email?.message}
 				{...register("email")}
 			/>
 			<RHFControllerSelectInput
@@ -65,7 +114,7 @@ export const BioForm = (onNext: Props) => {
 					type='text'
 					label='Date'
 					id='birthday'
-					placeholder='DD'
+					placeholder='D'
 					inputMode='numeric'
 					name='birthday'
 					control={control}
@@ -80,7 +129,7 @@ export const BioForm = (onNext: Props) => {
 					type='text'
 					label='Month'
 					id='birthmonth'
-					placeholder='MM'
+					placeholder='M'
 					inputMode='numeric'
 					name='birthmonth'
 					control={control}
@@ -113,7 +162,9 @@ export const BioForm = (onNext: Props) => {
 					{ value: "F", label: "Female", key: "femalegender" },
 				]}
 				{...register("gender")}
+				validationMsg={errors?.gender?.message}
 			/>
+			<Button type='submit'>Next</Button>
 		</form>
 	);
 };
